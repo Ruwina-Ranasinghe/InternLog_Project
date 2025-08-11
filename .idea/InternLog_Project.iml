@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/mongoose" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/mpath" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/mquery" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/ms" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/negotiator" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/node-addon-api" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/node-gyp-build" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/normalize-path" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/object-assign" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/object-inspect" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/on-finished" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/once" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/parseurl" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/path-is-absolute" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/path-parse" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/path-to-regexp" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/picomatch" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/proxy-addr" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/punycode" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/qs" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/range-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/raw-body" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/readdirp" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/resolve" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/rimraf" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/router" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/safe-buffer" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/safer-buffer" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/semver" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/send" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/serve-static" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/setprototypeof" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/side-channel" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/side-channel-list" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/side-channel-map" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/side-channel-weakmap" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/sift" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/source-map" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/source-map-support" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/sparse-bitfield" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/statuses" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/strip-bom" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/strip-json-comments" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/supports-preserve-symlinks-flag" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/to-regex-range" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/toidentifier" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/tr46" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/tree-kill" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/ts-node" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/ts-node-dev" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/tsconfig" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/type-is" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/typescript" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/undici-types" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/unpipe" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/v8-compile-cache-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/vary" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/webidl-conversions" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/whatwg-url" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/wrappy" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/xtend" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/node_modules/yn" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
