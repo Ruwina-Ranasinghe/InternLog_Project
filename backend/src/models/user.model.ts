@@ -5,6 +5,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
+  isAdmin: boolean;
   createdAt: any;
   updatedAt: any;
   __v: any;
@@ -24,6 +25,10 @@ const UserSchema: Schema = new Schema<IUser>(
     password: {
       type: Schema.Types.String,
       required: [true, "Password is required"],
+    },
+    isAdmin: {
+      type: Schema.Types.Boolean,
+      default: false,
     },
   },
   {
