@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 import {IUser} from "./user.model";
 
 export interface ITask extends Document {
+    _id: any;
     user: IUser;
     task_name: string;
     status: string;
