@@ -1,7 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
+import {IUser} from "./user.model";
 
 export interface ITask extends Document {
-    user: mongoose.Types.ObjectId;
+    user: IUser;
     task_name: string;
     status: string;
     description: string;
