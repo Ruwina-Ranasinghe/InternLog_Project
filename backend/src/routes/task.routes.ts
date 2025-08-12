@@ -1,23 +1,12 @@
 import { Router} from "express";
-import {authMiddleware} from "../middleware/auth.middleware";
 import * as taskController from "../controllers/task.controller";
 
 
 const taskRouter = Router();
 
-taskRouter.get('/', authMiddleware("admin"),taskController.getAllTasks);
-<<<<<<< Updated upstream
-=======
-
-taskRouter.get('/get-tasks',authMiddleware("user"),taskController.getUserTasks);
-taskRouter.post('/create-task',authMiddleware("user"),taskController.createTask);
-taskRouter.put('/update-task/:id', authMiddleware("user"), taskController.updateTask);
-taskRouter.delete('/delete-task/:id', authMiddleware("user"), taskController.deleteTask);
->>>>>>> Stashed changes
-
-taskRouter.get('/get-tasks',authMiddleware("user"),taskController.getUserTasks);
-taskRouter.post('/create-task',authMiddleware("user"),taskController.createTask);
-taskRouter.put('/update-task/:id', authMiddleware("user"), taskController.updateTask);
-taskRouter.delete('/delete-task/:id', authMiddleware("user"), taskController.deleteTask);
+taskRouter.get('/',taskController.getAllTasks);
+taskRouter.post('/create-task',taskController.createTask);
+taskRouter.put('/update-task/:id', taskController.updateTask);
+taskRouter.delete('/delete-task/:id', taskController.deleteTask);
 
 export default taskRouter;
