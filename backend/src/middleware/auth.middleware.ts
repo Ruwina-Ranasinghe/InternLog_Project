@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 
 interface JwtPayload {
     id: string;
-    role: string;
+    isAdmin: boolean;
 }
 
 export const authMiddleware = (requiredRole?: 'admin' | 'user') => {
-    return (req: Request & { user?: JwtPayload }, res: Response, next: NextFunction) => {
+    return async (req: Request & { user?: JwtPayload }, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({ message: 'No token provided' });
@@ -19,12 +19,18 @@ export const authMiddleware = (requiredRole?: 'admin' | 'user') => {
             const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
             req.user = decoded;
 
-            if (requiredRole && decoded.role !== requiredRole) {
-                return res.status(403).json({ message: 'Access denied: Insufficient role' });
+            // Role check
+            if (requiredRole) {
+                if (requiredRole === 'admin' && !decoded.isAdmin) {
+                    return res.status(403).json({ message: 'Access denied: Admins only' });
+                }
+                if (requiredRole === 'user' && decoded.isAdmin) {
+                    return res.status(403).json({ message: 'Access denied: Users only' });
+                }
             }
 
             next();
-        } catch {
+        } catch (err) {
             return res.status(401).json({ message: 'Invalid or expired token' });
         }
     };
