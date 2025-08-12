@@ -15,7 +15,10 @@ app.use(express.json());
 
 app.use('/api/auth', authRouter);
 app.use('/api/login', authRouter);
+
+
 app.use('/api/tasks', taskRouter);
+
 
 app.get('/', (req, res) => {
     res.send('API is running...');

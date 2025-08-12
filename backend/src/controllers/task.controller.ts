@@ -40,6 +40,15 @@ export const getAllTasks = async (req: Request, res: Response) => {
     }
 };
 
+export const getAllTasksForAdmin = async (req: Request, res: Response) => {
+  try {
+    const tasks = await getAllTasksService();
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to get all tasks", error });
+  }
+};
+
 export const updateTask = async (req: Request, res: Response) => {
     try {
         const updated = await updateTaskService(
