@@ -10,7 +10,7 @@ export interface ITask extends Document {
 }
 
 const taskSchema = new Schema<ITask>({
-    user: {
+   user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: [true, "user is required"]
