@@ -1,10 +1,12 @@
-import  { NavbarSimpleColored }  from './components/sidebar';
+// import SidebarAdmin from './components/./sidebarAdmin.tsx';
+import UserSidebar from "./components/sidebarUser.tsx";
 
 function App() {
     return (
 
         <div>
-            <NavbarSimpleColored/>
+            {/*<SidebarAdmin/>*/}
+            <UserSidebar userName="John Doe" userEmail="john@example.com" />
         </div>
     );
 }
