@@ -1,15 +1,12 @@
-
-import './App.css'
+import  { NavbarSimpleColored }  from './components/sidebar';
 
 function App() {
+    return (
 
-  return (
-    <>
-    <div>
-      <h1>Hello</h1>
-    </div>
-    </>
-  )
+        <div>
+            <NavbarSimpleColored/>
+        </div>
+    );
 }
 
-export default App
+export default App;
