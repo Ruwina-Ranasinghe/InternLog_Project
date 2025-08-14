@@ -1,41 +1,35 @@
-import Task, { ITask } from "../models/task.model";
-import mongoose from "mongoose";
+import { ITask} from "../models/task.model";
+import {
+    createTaskRepo,
+    deleteTaskRepo,
+    getAllTasksRepo,
+    getTasksRepo,
+    updateTaskRepo
+} from "../data_access/task.repo";
 
-
-export const createTaskService = async (
-    userId: mongoose.Types.ObjectId,
-    taskData: Partial<ITask>
-) => {
-    const task = new Task({
-        user: userId,
-        ...taskData
-    });
-    return await task.save();
+export const createTaskService = (data: any) => {
+    return createTaskRepo(data);
 };
 
-export const getUserTasksService = async (userId: mongoose.Types.ObjectId) => {
-    return await Task.find({ user: userId });
+export const getUserTasksService = (userId: string) => {
+    return getTasksRepo({user: userId});
 };
 
 export const getAllTasksService = async () => {
-    return await Task.find().populate("user", "name email");
+    return getAllTasksRepo();
 };
 
-export const updateTaskService = async (
-    userId: mongoose.Types.ObjectId,
+export const updateTaskService = (
+    userId: string,
     taskId: string,
     updateData: Partial<ITask>
 ) => {
-    return await Task.findOneAndUpdate(
-        { _id: taskId, user: userId },
-        updateData,
-        { new: true }
-    );
+    return updateTaskRepo(userId, taskId, updateData);
 };
 
 export const deleteTaskService = async (
-    userId: mongoose.Types.ObjectId,
+    userId: string,
     taskId: string
 ) => {
-    return await Task.findOneAndDelete({ _id: taskId, user: userId });
+    return deleteTaskRepo(userId, taskId);
 };

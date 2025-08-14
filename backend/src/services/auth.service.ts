@@ -1,17 +1,17 @@
 import bcrypt from 'bcrypt';
-import { User } from '../models/user.model';
 import { generateToken } from '../util/jwt';
+import {createUserRepo, findOneUserRepo} from "../data_access/user.repo";
+import {ErrorMessages,} from "../ constants/messages";
 
-export const registerUser = async (name: string, email: string, password: string, isAdmin: boolean) => {
-  const existingUser = await User.findOne({ email });
-  if (existingUser) throw new Error('Email already exists');
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await User.create({
-    name,
-    email,
+export const registerUserService = async (data :any) => {
+  const exist = await findOneUserRepo({ email: data.email});
+  if (exist) throw new Error(ErrorMessages.USER_ALREADY_EXIST);
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+  const user = await createUserRepo({
+    name: data.name,
+    email: data.email,
     password: hashedPassword,
-    isAdmin
+    isAdmin: data.isAdmin
   });
 
   return {
@@ -23,12 +23,11 @@ export const registerUser = async (name: string, email: string, password: string
   };
 };
 
-export const loginUser = async (email: string, password: string) => {
-  const user = await User.findOne({ email });
-  if (!user) throw new Error('Invalid credentials');
-
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) throw new Error('Invalid credentials');
+export const loginUserService = async (data: any) => {
+  const user = await findOneUserRepo({ email: data.email});
+  if (!user) throw new Error(ErrorMessages.NO_USER_ACCOUNT_FOUND);
+  const isMatch = await bcrypt.compare(data.password, user.password);
+  if (!isMatch) throw new Error(ErrorMessages.INVALID_CREDENTIALS);
 
   return {
     id: user._id,

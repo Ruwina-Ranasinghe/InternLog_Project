@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import {IRequest} from "../ constants/request";
 
 interface JwtPayload {
     id: string;
@@ -7,7 +8,7 @@ interface JwtPayload {
 }
 
 export const authMiddleware = (requiredRole?: 'admin' | 'user') => {
-    return async (req: Request & { user?: JwtPayload }, res: Response, next: NextFunction) => {
+    return async (req: IRequest & { user?: JwtPayload }, res: Response, next: NextFunction) => {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({ message: 'No token provided' });

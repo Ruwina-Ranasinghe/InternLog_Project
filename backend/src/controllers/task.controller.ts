@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import {NextFunction,Response} from "express";
 import {
     createTaskService,
     getUserTasksService,
@@ -6,63 +6,77 @@ import {
     updateTaskService,
     deleteTaskService
 } from "../services/task.service";
-import mongoose from "mongoose";
 
-export const createTask = async (req: Request, res: Response) => {
+import {IRequest} from "../ constants/request";
+import {ErrorMessages, HttpCodes, InfoMessages} from "../ constants/messages";
+
+export const createTask = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
-        const task = await createTaskService(
-            new mongoose.Types.ObjectId((req as any).user.id),
-            req.body
-        );
-        res.status(201).json(task);
-    } catch (error) {
-        res.status(500).json({ message: "Error creating task", error });
+        console.log(InfoMessages.TASK_CREATION_STARTED);
+        const data = await createTaskService({ ...req.body, user: req.user?.id });
+        console.log(InfoMessages.TASK_CREATION_SUCCESSFUL);
+        res.send(data);
+    } catch (e) {
+        next(e);
     }
 };
 
-export const getUserTasks = async (req: Request, res: Response) => {
+export const getUserTasks = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
-        const tasks = await getUserTasksService(
-            new mongoose.Types.ObjectId((req as any).user.id)
-        );
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ message: "Error fetching tasks", error });
+        console.log(InfoMessages.TASK_FETCHING_STARTED);
+        const data = await getUserTasksService(req.user.id);
+        console.log(InfoMessages.TASK_FETCHING_SUCCESSFUL);
+        res.send(data);
+    } catch (e) {
+        next(e)
     }
 };
 
-export const getAllTasks = async (req: Request, res: Response) => {
+export const getAllTasks = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
-        const tasks = await getAllTasksService();
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ message: "Error fetching all tasks", error });
+        console.log(InfoMessages.TASK_FETCHING_STARTED_BY_ADMIN);
+        const data = await getAllTasksService();
+        console.log(InfoMessages.TASK_FETCHING_SUCCESSFUL_BY_ADMIN);
+        res.send(data);
+    } catch (e) {
+        next(e);
     }
 };
 
-export const updateTask = async (req: Request, res: Response) => {
+export const updateTask = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
-        const updated = await updateTaskService(
-            new mongoose.Types.ObjectId((req as any).user.id),
+        console.log(InfoMessages.TASK_UPDATING_STARTED);
+        const data = await updateTaskService(
+            req.user.id,
             req.params.id,
             req.body
         );
-        if (!updated) return res.status(404).json({ message: "Task not found" });
-        res.json(updated);
-    } catch (error) {
-        res.status(500).json({ message: "Error updating task", error });
+        if (!data) {
+            return res.status(HttpCodes.NOT_FOUND).json({
+                message: ErrorMessages.TASK_NOT_FOUND
+            });
+        }
+        console.log(InfoMessages.TASK_UPDATED);
+        res.send(data);
+    } catch (e) {
+        next(e);
     }
 };
 
-export const deleteTask = async (req: Request, res: Response) => {
+export const deleteTask = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
-        const deleted = await deleteTaskService(
-            new mongoose.Types.ObjectId((req as any).user.id),
-            req.params.id
+        console.log(InfoMessages.TASK_DELETING_STARTED);
+        const data = await deleteTaskService(
+            req.user.id,
+            req.params.id,
         );
-        if (!deleted) return res.status(404).json({ message: "Task not found" });
-        res.json({ message: "Task deleted successfully" });
-    } catch (error) {
-        res.status(500).json({ message: "Error deleting task", error });
+        if (!data) {
+            return res.status(HttpCodes.NOT_FOUND).json({
+                message: ErrorMessages.TASK_NOT_FOUND
+            });
+        }
+        res.json({ message: InfoMessages.TASK_DELETE_SUCCESSFUL });
+    } catch (e) {
+        next(e);
     }
 };
