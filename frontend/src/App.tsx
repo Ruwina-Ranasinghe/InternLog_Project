@@ -1,12 +1,14 @@
-import UserSidebar from "./components/sidebarUser.tsx";
-import  { WebHeader }  from './components/webHeader';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminLog from './pages/admin/adminLog';
+import AdminDashboard from './pages/admin/adminDashboard';
 
 function App() {
     return (
-        <div>
-            <WebHeader/>
-            <UserSidebar userName="John Doe" userEmail="john@example.com" />
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<AdminLog />} /> 
+            </Routes>
+        </Router>
     );
 }
 
