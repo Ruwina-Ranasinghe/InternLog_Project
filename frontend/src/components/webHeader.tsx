@@ -8,7 +8,7 @@ const WebHeader = () => {
   return (
     <header
       className="fixed top-0 left-0 w-full border-b border-gray-200 dark:border-gray-700 px-4 z-50"
-      style={{ backgroundColor: '#D3B5F8', borderBottom: '2px solid #830999'  }}
+      style={{ backgroundColor: '#D3B5F8', borderBottom: '1px solid #830999'  }}
     >
       <div className="flex justify-between items-center h-14 sm:h-16 md:h-20 lg:h-24">
         <Group>

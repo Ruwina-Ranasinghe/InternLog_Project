@@ -49,7 +49,7 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0 md:left-0 md:right-auto md:z-10 
         `}
-         style={{ backgroundColor: '#C89FE4', borderRight: '2px solid #830999', zIndex: 50  }}
+         style={{ backgroundColor: '#C89FE4', borderRight: '1px solid #830999', borderTop: '1px solid #830999', zIndex: 50  }}
       >
         {/* Navigation */}
         <div className="flex flex-col gap-2 mt-4">
