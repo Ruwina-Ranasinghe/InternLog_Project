@@ -15,7 +15,7 @@ const SidebarAdmin = () => {
   return (
     <>
       {/* Hamburger icon for mobile */}
-      <div className="md:hidden fixed right-3 top-10 z-40">
+      <div className="md:hidden fixed right-3 top-2 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 bg-purple-800 text-white rounded-md shadow-md"
@@ -35,7 +35,7 @@ const SidebarAdmin = () => {
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0 md:left-0 md:right-auto md:z-10 
         `}
-         style={{ backgroundColor: '#C89FE4', borderRight: '2px solid #830999'  }}
+         style={{ backgroundColor: '#C89FE4', borderRight: '2px solid #830999', zIndex: 50  }}
       >
         {/* Navigation */}
         <div className="flex flex-col gap-2 mt-4">
