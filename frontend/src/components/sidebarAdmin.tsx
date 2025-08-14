@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { IconUserCircle, IconMenu2, IconX } from '@tabler/icons-react';
 
 const SidebarAdmin = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [active, setActive] = useState('dashboard');
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLinkClick = (link: string) => {
-    setActive(link);
+  useEffect(() => {
+    setActive(location.pathname);
+  }, [location.pathname]);
+
+  const handleLinkClick = (path: string) => {
+    navigate(path);
+    setActive(path);
     if (window.innerWidth < window.screen.width * 0.25) {
-      setIsOpen(false); // close sidebar on mobile after clicking
+      setIsOpen(false);
     }
   };
 
@@ -41,21 +49,21 @@ const SidebarAdmin = () => {
         <div className="flex flex-col gap-2 mt-4">
           <button
             className={`w-full text-left px-3 py-2 rounded ${
-              active === 'dashboard'
+              active === '/admin-dashboard'
                 ? 'bg-purple-800 text-white'
                 : 'bg-purple-300 text-purple-900'
             }`}
-            onClick={() => handleLinkClick('dashboard')}
+            onClick={() => handleLinkClick('/admin-dashboard')}
           >
             Dashboard
           </button>
           <button
             className={`w-full text-left px-3 py-2 rounded ${
-              active === 'tasks'
+              active === '/admin-log'
                 ? 'bg-purple-800 text-white'
                 : 'bg-purple-300 text-purple-900'
             }`}
-            onClick={() => handleLinkClick('tasks')}
+            onClick={() => handleLinkClick('/admin-log')}
           >
             All Tasks
           </button>
