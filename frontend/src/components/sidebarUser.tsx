@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { IconUserCircle, IconMenu2, IconX } from '@tabler/icons-react';
 
 interface UserSidebarProps {
@@ -7,11 +8,19 @@ interface UserSidebarProps {
 }
 
 const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
-  const [active, setActive] = useState('dashboard');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [active, setActive] = useState('user-dashboard');
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLinkClick = (link: string) => {
-    setActive(link);
+  // Update active state based on current route
+  useEffect(() => {
+    setActive(location.pathname);
+  }, [location.pathname]);
+
+  const handleLinkClick = (path: string) => {
+    navigate(path); // Navigate to the route
+    setActive(path);
     if (window.innerWidth < window.screen.width * 0.25) {
       setIsOpen(false); // close sidebar on mobile after clicking
     }
@@ -20,7 +29,7 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
   return (
     <>
       {/* Hamburger icon for mobile */}
-      <div className="md:hidden fixed left-3 top-10 z-40">
+      <div className="md:hidden fixed right-3 top-2 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 bg-purple-800 text-white rounded-md shadow-md"
@@ -29,7 +38,7 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
         </button>
       </div>
 
-      {/* Sidebar */}
+      {/* UserSidebar */}
       <nav
         className={`
           fixed left-0
@@ -38,41 +47,41 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
             w-64 p-4 flex flex-col justify-between
             transform transition-transform duration-300 ease-in-out z-40
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0 md:left-0 md:right-auto md:z-10
+          md:translate-x-0 md:left-0 md:right-auto md:z-10 
         `}
-        style={{ backgroundColor: '#C89FE4', borderRight: '2px solid #830999' }}
+         style={{ backgroundColor: '#C89FE4', borderRight: '2px solid #830999', zIndex: 50  }}
       >
         {/* Navigation */}
         <div className="flex flex-col gap-2 mt-4">
           <button
             className={`w-full text-left px-3 py-2 rounded ${
-              active === 'dashboard'
+              active === '/user-dashboard'
                 ? 'bg-purple-800 text-white'
                 : 'bg-purple-300 text-purple-900'
             }`}
-            onClick={() => handleLinkClick('dashboard')}
+            onClick={() => handleLinkClick('/user-dashboard')}
           >
             Dashboard
           </button>
           <button
             className={`w-full text-left px-3 py-2 rounded ${
-              active === 'add-log'
+              active === '/create-task'
                 ? 'bg-purple-800 text-white'
                 : 'bg-purple-300 text-purple-900'
             }`}
-            onClick={() => handleLinkClick('add-log')}
+            onClick={() => handleLinkClick('/create-task')}
           >
-            Add Log
+            Add a Task
           </button>
           <button
             className={`w-full text-left px-3 py-2 rounded ${
-              active === 'my-logs'
+              active === '/view-all-tasks'
                 ? 'bg-purple-800 text-white'
                 : 'bg-purple-300 text-purple-900'
             }`}
-            onClick={() => handleLinkClick('my-logs')}
+            onClick={() => handleLinkClick('/view-all-tasks')}
           >
-            My Logs
+            My Tasks
           </button>
         </div>
 
@@ -89,7 +98,7 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
         </div>
       </nav>
 
-      {/* Overlay for mobile */}
+      {/* Overlay for mobile when sidebar is open */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
