@@ -1,5 +1,5 @@
 import SidebarAdmin from "../../../components/sidebarAdmin";
-import TaskCard from "../../../components/taskCard";
+import TaskCard from "../../../components/adminTaskCard";
 import WebHeader from "../../../components/webHeader";
 
 const AdminLog = () => {
