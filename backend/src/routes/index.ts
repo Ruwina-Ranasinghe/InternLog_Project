@@ -5,6 +5,5 @@ import taskRouter from "./task.routes";
 
 export const routes = (app: Express) => {
     app.use('/api/auth', authRouter);
-    app.use('/api/login', authRouter);
     app.use('/api/tasks', taskRouter);
 };
