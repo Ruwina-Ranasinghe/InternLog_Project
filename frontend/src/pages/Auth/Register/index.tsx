@@ -8,9 +8,40 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [role, setRole] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log({ name, email, password, confirmPassword, role });
+
+        // Validate password match
+        if (password !== confirmPassword) {
+            return alert("Passwords do not match");
+        }
+
+        try {
+            const res = await fetch("http://localhost:5000/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                    isAdmin: role === "Admin", // convert role to boolean
+                }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(data.message || "Registration failed");
+            } else {
+                console.log("User registered:", data);
+                alert("Registration successful!");
+                // Redirect to login page
+                window.location.href = "/login";
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Something went wrong. Please try again.");
+        }
     };
 
     return (
@@ -117,7 +148,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    {/* Role Selection with Divider */}
+                    {/* Role Selection */}
                     <div className="pt-2">
                         <div className="flex space-x-6 justify-center">
                             <label className="flex items-center space-x-2">
