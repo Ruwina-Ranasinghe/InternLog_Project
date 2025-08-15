@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, {Document, Model, Schema} from "mongoose";
 import {IUser} from "./user.model";
 
 export interface ITask extends Document {
@@ -10,7 +10,7 @@ export interface ITask extends Document {
     date: Date;
 }
 
-const taskSchema = new Schema<ITask>({
+const TaskSchema = new Schema<ITask>({
    user: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -34,4 +34,4 @@ const taskSchema = new Schema<ITask>({
     }
 });
 
-export default mongoose.model<ITask>("Task", taskSchema);
+export const Task = mongoose.model<ITask>("Task", TaskSchema);
