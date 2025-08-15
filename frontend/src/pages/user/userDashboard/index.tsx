@@ -1,7 +1,7 @@
 import TaskStatusChart from "../../../components/pieChart";
 import SidebarUser from "../../../components/sidebarUser";
 import TaskStatusCards from "../../../components/taskStatusCard";
-import WebHeader from "../../../components/webHeader";
+import { WebHeader } from "../../../components/webHeader";
 
 const UserDashboard = () => {
     const completedValue = 140;
