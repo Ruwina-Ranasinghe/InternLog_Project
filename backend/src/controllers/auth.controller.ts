@@ -1,95 +1,26 @@
-import { Request, Response } from 'express';
-import * as authService from '../services/auth.service';
+import {NextFunction, Request, Response} from 'express';
+import {IRequest} from "../ constants/request";
+import {loginUserService, registerUserService} from "../services/auth.service";
+import {InfoMessages} from "../ constants/messages";
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (req: IRequest, res: Response, next: NextFunction) => {
   try {
-    const { name, email, password, isAdmin } = req.body;
-    const result = await authService.registerUser(name, email, password, isAdmin ?? false);
-    res.status(201).json(result);
-  } catch (err: any) {
-    res.status(400).json({ message: err.message });
+    console.log(InfoMessages.USER_REGISTRATION_STARTED)
+    const data = await registerUserService(req.body);
+    console.log(InfoMessages.USER_REGISTRATION_SUCCESSFUL)
+    res.send(data);
+  } catch (e) {
+    next(e);
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: IRequest, res: Response, next: NextFunction) => {
   try {
-    const { email, password } = req.body;
-    const result = await authService.loginUser(email, password);
-    res.status(200).json(result);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  } catch (err: any) {
-    res.status(400).json({ message: err.message });
+    console.log(InfoMessages.USER_LOGIN_STARTED)
+    const data = await loginUserService(req.body);
+    console.log(InfoMessages.USER_LOGIN_SUCCESSFUL)
+    res.send(data);
+  } catch (e) {
+    next(e);
   }
 };

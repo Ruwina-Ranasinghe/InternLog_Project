@@ -1,6 +1,6 @@
-import { Autocomplete, Burger, Group } from '@mantine/core';
+import { Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import logo from '../assets/logo1.png';
 
 export function WebHeader() {
