@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-<<<<<<< Updated upstream
 import Home from "./pages/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -10,15 +9,12 @@ import EditTask from "./pages/user/editTask";
 import AdminDashboard from "./pages/admin/adminDashboard";
 import AdminLog from "./pages/admin/adminLog";
 import NotFound from "./pages/404/errorPage";
-=======
-
->>>>>>> Stashed changes
 
 const App = () => {
     return (
         <Router>
             <Routes>
-<<<<<<< Updated upstream
+
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
@@ -29,16 +25,10 @@ const App = () => {
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/admin-log" element={<AdminLog />} />
                 <Route path="*" element={<NotFound />} />
-=======
-                <Route path="/" element={< />} />
-                <Route path="/payment" element={<Payment />} />
->>>>>>> Stashed changes
+
             </Routes>
         </Router>
     );
 };
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 export default App;
