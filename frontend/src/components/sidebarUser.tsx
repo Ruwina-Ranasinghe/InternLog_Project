@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IconUserCircle, IconMenu2, IconX } from '@tabler/icons-react';
 
-interface UserSidebarProps {
-  userName: string;
-  userEmail: string;
-}
-
-const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
+const UserSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [active, setActive] = useState('user-dashboard');
   const [isOpen, setIsOpen] = useState(false);
+
+  const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
 
   // Update active state based on current route
   useEffect(() => {
@@ -94,8 +92,8 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
           <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
             <IconUserCircle size={30} />
           </div>
-          <p className="text-sm text-gray-700 select-none">{userName}</p>
-          <p className="text-xs text-gray-500 select-none">{userEmail}</p>
+          <p className="text-sm text-gray-700 select-none">{name}</p>
+          <p className="text-xs text-gray-500 select-none">{email}</p>
           <button onClick={handleLogout} className="mt-2 w-full bg-purple-800 text-white text-sm py-1 rounded-full">
             Logout
           </button>

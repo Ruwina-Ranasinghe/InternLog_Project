@@ -21,6 +21,8 @@ const Login =()=> {
             if (response.ok) {
                 // Save token and role in localStorage
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("name", data.name);
+                localStorage.setItem("email", data.email);
                 localStorage.setItem("isAdmin", data.isAdmin);
 
                 // Redirect based on role
@@ -43,7 +45,6 @@ const Login =()=> {
         <div className="flex items-center justify-center min-h-screen bg-[#D3B5F8] px-4 sm:px-6 lg:px-8">
             <div className="bg-white shadow-sm rounded-md p-6 flex flex-col items-center w-full max-w-sm">
 
-                {/* Logo & Heading */}
                 <div className="w-full text-center">
                     <img
                         alt="Your Company"
@@ -55,10 +56,8 @@ const Login =()=> {
                     </h2>
                 </div>
 
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="mt-6 w-full space-y-4">
 
-                    {/* Email */}
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                             Email address
@@ -80,7 +79,6 @@ const Login =()=> {
                         </div>
                     </div>
 
-                    {/* Password */}
                     <div>
                         <div className="flex items-center justify-between">
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -108,7 +106,6 @@ const Login =()=> {
                         </div>
                     </div>
 
-                    {/* Submit Button */}
                     <Button
                         type="submit"
                         fullWidth
@@ -119,7 +116,6 @@ const Login =()=> {
                     </Button>
                 </form>
 
-                {/* Signup Link */}
                 <p className="mt-6 text-center text-sm text-gray-600">
                     Do not have an account yet?{" "}
                     <a href="/register" className="font-semibold text-[#B453F5] hover:text-[#830999]">

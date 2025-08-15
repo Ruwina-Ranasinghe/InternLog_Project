@@ -8,6 +8,9 @@ const SidebarAdmin = () => {
   const [active, setActive] = useState('dashboard');
   const [isOpen, setIsOpen] = useState(false);
 
+  const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
+
   useEffect(() => {
     setActive(location.pathname);
   }, [location.pathname]);
@@ -78,8 +81,8 @@ const SidebarAdmin = () => {
           <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
             <IconUserCircle size={30} />
           </div>
-          <p className="text-sm text-gray-700 select-none">Admin</p>
-          <p className="text-xs text-gray-500 select-none">user@email.com</p>
+          <p className="text-sm text-gray-700 select-none">{name}</p>
+          <p className="text-xs text-gray-500 select-none">{email}</p>
           <button onClick={handleLogout} className="mt-2 w-full bg-purple-800 text-white text-sm py-1 rounded-full">
             Logout
           </button>
