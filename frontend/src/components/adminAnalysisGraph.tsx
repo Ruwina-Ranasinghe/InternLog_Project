@@ -26,8 +26,8 @@ const AdminAnalysisGraph: React.FC<AdminAnalysisGraphProps> = ({
     ];
 
     return (
-        <div className="bg-gray-100 p-6 rounded-lg border-2 border-blue-400 w-full max-w-2xl">
-            <h3 className="text-purple-600 font-semibold mb-4">Overall Task Status</h3>
+        <div className="bg-gray-100 p-6 rounded-lg border-2 border-[#B453F5] w-full max-w-2xl md:w-96">
+            <h3 className="text-purple-600 font-semibold text-center mb-4">Overall Task Status</h3>
 
             {/* Chart Container */}
             <div style={{ height: `${height}px` }} className="mb-4">
