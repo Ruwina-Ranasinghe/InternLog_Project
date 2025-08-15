@@ -21,7 +21,7 @@ const App = () => {
                 <Route path="/user-dashboard" element={<UserDashboard />} />
                 <Route path="/create-task" element={<CreateTask />} />
                 <Route path="/view-all-tasks" element={<ViewAllTasks />} />
-                <Route path="/edit-task" element={<EditTask />} />
+                <Route path="/edit-task/:id" element={<EditTask />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/admin-log" element={<AdminLog />} />
                 <Route path="*" element={<NotFound />} />
