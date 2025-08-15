@@ -6,9 +6,37 @@ const Login =()=> {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({email, password});
+
+        try {
+            const response = await fetch("http://localhost:5000/api/auth/login", {
+                method: "POST",
+                headers: {"Content-Type": "application/json",},
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Save token and role in localStorage
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("isAdmin", data.isAdmin);
+
+                // Redirect based on role
+                if (data.isAdmin) {
+                    window.location.href = "/admin-dashboard";
+                } else {
+                    window.location.href = "/user-dashboard";
+                }
+            } else {
+                alert(data.message || "Login failed");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            alert("Something went wrong. Please try again later.");
+        }
+
     };
 
     return (
