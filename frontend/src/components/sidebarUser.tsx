@@ -26,6 +26,10 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
     }
   };
 
+  const handleLogout = () => {
+      navigate("/");
+  };
+
   return (
     <>
       {/* Hamburger icon for mobile */}
@@ -92,7 +96,7 @@ const UserSidebar = ({ userName, userEmail }: UserSidebarProps) => {
           </div>
           <p className="text-sm text-gray-700 select-none">{userName}</p>
           <p className="text-xs text-gray-500 select-none">{userEmail}</p>
-          <button className="mt-2 w-full bg-purple-800 text-white text-sm py-1 rounded-full">
+          <button onClick={handleLogout} className="mt-2 w-full bg-purple-800 text-white text-sm py-1 rounded-full">
             Logout
           </button>
         </div>

@@ -64,7 +64,7 @@ export default function Home() {
                                 radius="md"
                                 className="w-full sm:w-48 bg-[#B453F5] hover:bg-[#830999] text-white font-semibold rounded-full py-3 shadow-md transition duration-200"
                             >
-                                Sign up
+                                Get started
                             </Button>
                         </Link>
                     </div>

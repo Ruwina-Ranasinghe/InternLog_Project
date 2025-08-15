@@ -3,7 +3,7 @@ import SidebarUser from "../../../components/sidebarUser";
 import TaskStatusCards from "../../../components/taskStatusCard";
 import WebHeader from "../../../components/webHeader";
 
-const CreateTask = () => {
+const UserDashboard = () => {
     const completedValue = 140;
     const inProgressedValue = 100;
     const todoValue = 30;
@@ -32,4 +32,4 @@ const CreateTask = () => {
     )
 }
 
-export default CreateTask;
+export default UserDashboard;
