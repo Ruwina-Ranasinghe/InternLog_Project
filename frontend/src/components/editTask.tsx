@@ -1,16 +1,26 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const EditTaskForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { task } = location.state || {};
+
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: task?.task_name || '',
+    description: task?.description || '',
     priority: 'Low',
     dueDate: '',
     attachments: [] as File[]
   });
 
+  // Redirect if no task is passed
+  useEffect(() => {
+    if (!task) {
+      alert("No task data provided!");
+      navigate('/view-all-tasks');
+    }
+  }, [task, navigate]);
   const handleClose = () => {
     navigate('/view-all-tasks');
   };
