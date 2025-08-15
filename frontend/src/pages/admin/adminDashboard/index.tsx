@@ -1,4 +1,4 @@
-import {WebHeader} from "../../../components/webHeader.tsx";
+import WebHeader from "../../../components/webHeader.tsx";
 import SidebarAdmin from "../../../components/sidebarAdmin.tsx";
 import BarChartComponent from "../../../components/barGraph.tsx";
 import AdminAnalysisGraph from "../../../components/adminAnalysisGraph.tsx";
