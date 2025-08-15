@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, PasswordInput, TextInput, Anchor } from "@mantine/core";
+import logo from "../../../assets/logo1.png";
 
 const Login =()=> {
     const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const Login =()=> {
                 <div className="w-full text-center">
                     <img
                         alt="Your Company"
-                        src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                        src={logo}
                         className="mx-auto h-10 w-auto"
                     />
                     <h2 className="mt-6 text-2xl font-bold tracking-tight text-gray-800">

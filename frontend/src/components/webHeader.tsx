@@ -1,5 +1,6 @@
 import { Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo1.png';
 
 const WebHeader = () => {
@@ -14,12 +15,14 @@ const WebHeader = () => {
                 <Group>
                     <Burger opened={opened} onClick={toggle} size="sm" className="sm:hidden" />
                     <div className="flex items-center ml-4">
+                        <Link to="/">
                         <img
                             src={logo}
                             alt="Company Logo"
                             className="h-8 w-auto sm:h-10 md:h-12 lg:h-14 object-contain"
                             style={{ maxWidth: '200px' }}
                         />
+                        </Link>
                     </div>
                 </Group>
             </div>
