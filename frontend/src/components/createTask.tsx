@@ -6,7 +6,7 @@ const CreateTaskForm = () => {
   const [formData, setFormData] = useState({
     task_name: '',
     description: '',
-    status: 'pending', // default status
+    status: 'todo',
   });
 
   const handleClose = () => {
@@ -102,7 +102,7 @@ const CreateTaskForm = () => {
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
-                <option value="pending">Pending</option>
+                <option value="todo">To do</option>
                 <option value="in-progress">In Progress</option>
                 <option value="completed">Completed</option>
               </select>

@@ -23,6 +23,8 @@ export class InfoMessages {
     public static TASK_UPDATED = "Task updated";
     public static TASK_DELETING_STARTED = "Task deleting started"
     public static TASK_DELETE_SUCCESSFUL = "Task delete successful";
+    public static TASK_STATUS_FETCHING_STARTED = "Task status count fetching started";
+    public static TASK_STATUS_FETCHED = "Task status count fetching successful";
 }
 
 export class HttpCodes {

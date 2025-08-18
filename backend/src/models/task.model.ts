@@ -22,8 +22,8 @@ const TaskSchema = new Schema<ITask>({
     },
     status: {
         type: Schema.Types.String,
-        enum: ["pending", "in-progress", "completed"],
-        default: "pending"
+        enum: ["todo", "in-progress", "completed"],
+        default: "todo"
     },
     description: {
         type: Schema.Types.String
