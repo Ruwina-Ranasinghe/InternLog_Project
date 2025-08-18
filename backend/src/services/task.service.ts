@@ -35,10 +35,15 @@ export const deleteTaskService = async (
     return deleteTaskRepo(userId, taskId);
 };
 
+<<<<<<< Updated upstream
 export const getTaskStatusCountsService = async (userId: string) => {
     try {
         return await getTaskStatusCountsRepo(userId);
     } catch (error) {
         throw error;
     }
+=======
+export const getTasksByUserService = (userId: string) => {
+    return getTasksRepo({ user: userId });
+>>>>>>> Stashed changes
 };

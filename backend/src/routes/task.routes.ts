@@ -4,8 +4,13 @@ import {
     createTask,
     deleteTask,
     getAllTasks,
+<<<<<<< Updated upstream
     getTaskStatusCounts,
     getUserTasks,
+=======
+    getUserTasks,
+    getUserTasksByAdmin,
+>>>>>>> Stashed changes
     updateTask
 } from "../controllers/task.controller";
 import {Users} from "../ constants/enums";
@@ -13,6 +18,7 @@ import {Users} from "../ constants/enums";
 const taskRouter = Router();
 
 taskRouter.get('/', authMiddleware(Users.ADMIN),getAllTasks);
+taskRouter.get('/user/:id', authMiddleware(Users.ADMIN),getUserTasksByAdmin);
 
 taskRouter.get('/get-tasks',authMiddleware(Users.USER),getUserTasks);
 taskRouter.post('/create-task',authMiddleware(Users.USER),createTask);

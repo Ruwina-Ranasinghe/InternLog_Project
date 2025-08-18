@@ -6,7 +6,9 @@ export const createTaskRepo = (data: any) => {
 };
 
 export const getTasksRepo = (filters: any)=>{
-    return Task.find(filters).exec();
+    return Task.find(filters)
+        .populate("user", "name email")
+        .exec();
 }
 
 export const getAllTasksRepo = () => {

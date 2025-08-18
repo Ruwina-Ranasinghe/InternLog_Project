@@ -12,6 +12,9 @@ export class InfoMessages {
     public static USER_LOGIN_STARTED = "User login started";
     public static USER_LOGIN_SUCCESSFUL = "User login successful";
 
+    public static USER_FETCHING_STARTED = "User fetching started";
+    public static USER_FETCHING_SUCCESSFUL = "User fetching successful";
+
     //Task Creation
     public static TASK_CREATION_STARTED = "Task creation started";
     public static TASK_CREATION_SUCCESSFUL = "Task creation successful";

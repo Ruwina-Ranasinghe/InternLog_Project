@@ -4,8 +4,12 @@ import {
     getUserTasksService,
     getAllTasksService,
     updateTaskService,
+<<<<<<< Updated upstream
     deleteTaskService,
     getTaskStatusCountsService
+=======
+    deleteTaskService, getTasksByUserService
+>>>>>>> Stashed changes
 } from "../services/task.service";
 
 import {IRequest} from "../ constants/request";
@@ -80,6 +84,7 @@ export const deleteTask = async (req: IRequest, res: Response, next: NextFunctio
     } catch (e) {
         next(e);
     }
+<<<<<<< Updated upstream
 };
 
 export const getTaskStatusCounts = async (req: IRequest, res: Response, next: NextFunction) => {
@@ -104,5 +109,18 @@ export const getTaskStatusCounts = async (req: IRequest, res: Response, next: Ne
     } catch (error) {
         console.error("Error fetching task status counts:", error);
         next(error);
+=======
+
+};
+
+export const getUserTasksByAdmin = async (req: IRequest, res: Response, next: NextFunction) => {
+    try {
+        console.log(InfoMessages.TASK_FETCHING_STARTED_BY_ADMIN);
+        const data = await getTasksByUserService(req.params.userId);
+        console.log(InfoMessages.TASK_FETCHING_SUCCESSFUL_BY_ADMIN);
+        res.send(data);
+    } catch (e) {
+        next(e);
+>>>>>>> Stashed changes
     }
 };
