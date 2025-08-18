@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CreateTaskForm = () => {
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         task_name: '',
         description: '',
-        status: 'pending', // default status
+        status: 'todo', // default status
         priority: 'Low',
         dueDate: '',
         attachments: [] as File[]

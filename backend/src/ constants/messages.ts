@@ -12,6 +12,9 @@ export class InfoMessages {
     public static USER_LOGIN_STARTED = "User login started";
     public static USER_LOGIN_SUCCESSFUL = "User login successful";
 
+    public static USER_FETCHING_STARTED = "User fetching started";
+    public static USER_FETCHING_SUCCESSFUL = "User fetching successful";
+
     //Task Creation
     public static TASK_CREATION_STARTED = "Task creation started";
     public static TASK_CREATION_SUCCESSFUL = "Task creation successful";
@@ -23,6 +26,8 @@ export class InfoMessages {
     public static TASK_UPDATED = "Task updated";
     public static TASK_DELETING_STARTED = "Task deleting started"
     public static TASK_DELETE_SUCCESSFUL = "Task delete successful";
+    public static TASK_STATUS_FETCHING_STARTED = "Task status count fetching started";
+    public static TASK_STATUS_FETCHED = "Task status count fetching successful";
 }
 
 export class HttpCodes {

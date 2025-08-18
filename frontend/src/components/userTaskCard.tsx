@@ -5,7 +5,7 @@ interface Task {
   _id: string;
   task_name: string;
   description: string;
-  status: "pending" | "in-progress" | "completed";
+  status: "todo" | "in-progress" | "completed";
 }
 
 const TaskCard = () => {
@@ -54,7 +54,7 @@ const TaskCard = () => {
 
   const getStatusClass = (status: string) => {
     switch (status) {
-      case "pending":
+      case "todo":
         return "bg-yellow-500 text-white";
       case "in-progress":
         return "bg-red-600 text-white";

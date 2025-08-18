@@ -4,6 +4,7 @@ import {
     deleteTaskRepo,
     getAllTasksRepo,
     getTasksRepo,
+    getTaskStatusCountsRepo,
     updateTaskRepo
 } from "../data_access/task.repo";
 
@@ -32,4 +33,17 @@ export const deleteTaskService = async (
     taskId: string
 ) => {
     return deleteTaskRepo(userId, taskId);
+};
+
+<<<<<<< Updated upstream
+export const getTaskStatusCountsService = async (userId: string) => {
+    try {
+        return await getTaskStatusCountsRepo(userId);
+    } catch (error) {
+        throw error;
+    }
+=======
+export const getTasksByUserService = (userId: string) => {
+    return getTasksRepo({ user: userId });
+>>>>>>> Stashed changes
 };
