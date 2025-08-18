@@ -1,6 +1,6 @@
 import {NextFunction,Response} from "express";
-import {IRequest} from "../ constants/request";
-import {InfoMessages} from "../ constants/messages";
+import {IRequest} from "../constants/request";
+import {InfoMessages} from "../constants/messages";
 import {getAllUsersService} from "../services/user.service";
 
 export const getAllUsers = async (req: IRequest, res: Response, next: NextFunction) => {

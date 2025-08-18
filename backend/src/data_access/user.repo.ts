@@ -1,5 +1,5 @@
 import {User} from "../models/user.model";
-import {Users} from "../ constants/enums";
+import {Users} from "../constants/enums";
 
 export const findOneUserRepo = (filters: any) => {
     return User.findOne(filters).exec();

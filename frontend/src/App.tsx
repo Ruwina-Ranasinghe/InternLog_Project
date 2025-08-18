@@ -9,6 +9,7 @@ import EditTask from "./pages/user/editTask";
 import AdminDashboard from "./pages/admin/adminDashboard";
 import AdminLog from "./pages/admin/adminLog";
 import NotFound from "./pages/404/errorPage";
+import UserLog from "./pages/admin/userLog";
 
 const App = () => {
     return (
@@ -23,7 +24,8 @@ const App = () => {
                 <Route path="/view-all-tasks" element={<ViewAllTasks />} />
                 <Route path="/edit-task/:id" element={<EditTask />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path="/admin-log" element={<AdminLog />} />
+                <Route path="/tasks/user/:id" element={<AdminLog />} />
+                <Route path="/user-log" element={<UserLog />} />
                 <Route path="*" element={<NotFound />} />
 
             </Routes>

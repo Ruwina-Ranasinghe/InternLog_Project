@@ -7,16 +7,13 @@ import {
     createTask,
     deleteTask,
     getAllTasks,
-<<<<<<< Updated upstream
     getTaskStatusCounts,
     getUserTasks,
-=======
     getUserTasks,
     getUserTasksByAdmin,
->>>>>>> Stashed changes
     updateTask
 } from "../controllers/task.controller";
-import {Users} from "../ constants/enums";
+import {Users} from "../constants/enums";
 
 const taskRouter = Router();
 const uploadDir = path.join(__dirname, "../../uploads");

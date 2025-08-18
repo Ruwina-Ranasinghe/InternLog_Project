@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { generateToken } from '../util/jwt';
 import {createUserRepo, findOneUserRepo} from "../data_access/user.repo";
-import {ErrorMessages,} from "../ constants/messages";
+import {ErrorMessages,} from "../constants/messages";
 
 export const registerUserService = async (data :any) => {
   const exist = await findOneUserRepo({ email: data.email});

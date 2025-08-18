@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
-import {IRequest} from "../ constants/request";
+import {IRequest} from "../constants/request";
 import {loginUserService, registerUserService} from "../services/auth.service";
-import {InfoMessages} from "../ constants/messages";
+import {InfoMessages} from "../constants/messages";
 
 export const register = async (req: IRequest, res: Response, next: NextFunction) => {
   try {

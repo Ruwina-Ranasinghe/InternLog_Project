@@ -22,7 +22,7 @@ const tasks: Task[] = [
   },
 ];
 
-const TaskCard = () => {
+const UserTasks = () => {
   return (
     <div className="lg:space-y-6  space-y-6 ">
       {tasks.map((task) => (
@@ -55,4 +55,4 @@ const TaskCard = () => {
   );
 };
 
-export default TaskCard;
+export default UserTasks;

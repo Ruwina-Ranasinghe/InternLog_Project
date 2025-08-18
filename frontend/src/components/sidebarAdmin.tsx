@@ -66,13 +66,13 @@ const SidebarAdmin = () => {
           </button>
           <button
             className={`w-full text-left px-3 py-2 rounded ${
-              active === '/admin-log'
+              active === '/user-log'
                 ? 'bg-purple-800 text-white'
                 : 'bg-purple-300 text-purple-900'
             }`}
-            onClick={() => handleLinkClick('/admin-log')}
+            onClick={() => handleLinkClick('/user-log')}
           >
-            All Tasks
+            All User
           </button>
         </div>
 

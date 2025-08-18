@@ -1,6 +1,7 @@
 import SidebarAdmin from "../../../components/sidebarAdmin";
 import TaskCard from "../../../components/adminTaskCard";
 import WebHeader from "../../../components/webHeader";
+import UserTasks from "../../../components/adminTaskCard";
 
 const AdminLog = () => {
     return (
@@ -14,7 +15,7 @@ const AdminLog = () => {
                         <div className="pb-7 text-2xl font-bold" style={{color: '#1f2937'}}>
                             All Tasks
                         </div>
-                        <TaskCard/>
+                        <UserTasks/>
                     </div>
                     
                 </main>

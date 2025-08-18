@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import {IRequest} from "../ constants/request";
+import {IRequest} from "../constants/request";
 
 interface JwtPayload {
     id: string;
