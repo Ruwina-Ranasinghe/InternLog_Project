@@ -28,6 +28,8 @@ export class InfoMessages {
     public static TASK_DELETE_SUCCESSFUL = "Task delete successful";
     public static TASK_STATUS_FETCHING_STARTED = "Task status count fetching started";
     public static TASK_STATUS_FETCHED = "Task status count fetching successful";
+    public static PRIORITY_COUNTS_FETCHING_STARTED: 'Fetching task priority counts started';
+    public static PRIORITY_COUNTS_FETCHING_SUCCESS: 'Task priority counts fetched successfully';
 }
 
 export class HttpCodes {

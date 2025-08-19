@@ -8,14 +8,17 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
-const BarChartComponent = () => {
-    // Sample data similar to your image
-    const data = [
-        { priority: "High", tasks: 10 },
-        { priority: "Medium", tasks: 25 },
-        { priority: "Low", tasks: 20 },
-    ];
+interface PriorityData {
+    priority: string;
+    tasks: number;
+}
 
+interface Props {
+    data: PriorityData[];
+}
+
+const BarChartComponent = ({ data }: Props)  => {
+    console.log("Chart received data:", data);
     return (
         <div className="bg-white border-2 border-[#B453F5] rounded-lg shadow-md p-6 w-full md:w-96">
             <h3 className="text-purple-600 font-semibold text-center mb-4">

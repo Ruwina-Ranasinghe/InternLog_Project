@@ -7,6 +7,7 @@ import {
     createTask,
     deleteTask,
     getAllTasks,
+    getTaskPriorityCounts,
     getTaskStatusCounts,
     getUserTasks,
     getUserTasksByAdmin,
@@ -30,6 +31,7 @@ const upload = multer({ storage });
 
 taskRouter.get('/', authMiddleware(Users.ADMIN),getAllTasks);
 taskRouter.get('/user/:id', authMiddleware(Users.ADMIN),getUserTasksByAdmin);
+taskRouter.get('/priority-counts', authMiddleware(Users.ADMIN), getTaskPriorityCounts);
 
 taskRouter.get('/get-tasks',authMiddleware(Users.USER),getUserTasks);
 taskRouter.post('/create-task', authMiddleware(Users.USER), upload.array("attachments"), createTask);

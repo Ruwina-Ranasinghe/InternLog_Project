@@ -58,3 +58,45 @@ export const getTaskStatusCountsRepo = async (userId: string | mongoose.Types.Ob
         throw new Error(`Failed to fetch task status counts:`);
     }
 };
+
+export const getTaskPriorityCountsRepo = async () => {
+    try {
+        console.log("Fetching priority counts from DB...");
+
+        const results = await Task.aggregate([
+            {
+                $match: { priority: { $exists: true, $ne: null } } // Exclude null/undefined
+            },
+            {
+                $group: {
+                    _id: "$priority",  // Keep original case
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        console.log("Raw counts from DB:", results);
+
+        const counts = {
+            High: 0,
+            Medium: 0,
+            Low: 0
+        };
+
+        results.forEach(item => {
+            if (item._id === 'High') counts.High = item.count;
+            if (item._id === 'Medium') counts.Medium = item.count;
+            if (item._id === 'Low') counts.Low = item.count;
+        });
+
+        console.log('Priority counts:', counts);
+        return counts;
+    } catch (error: unknown) {
+        let errorMessage = "Failed to fetch task priority counts";
+        if (error instanceof Error) {
+            errorMessage += `: ${error.message}`;
+        }
+        console.error("Error in getTaskPriorityCountsRepo:", error);
+        throw new Error(errorMessage);
+    }
+};

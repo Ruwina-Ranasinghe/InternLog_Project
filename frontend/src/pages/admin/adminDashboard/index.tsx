@@ -1,9 +1,51 @@
+import { useEffect, useState } from "react";
 import WebHeader from "../../../components/webHeader.tsx";
 import SidebarAdmin from "../../../components/sidebarAdmin.tsx";
 import BarChartComponent from "../../../components/barGraph.tsx";
 import AdminAnalysisGraph from "../../../components/adminAnalysisGraph.tsx";
 
 const AdminDashboard =()=>{
+    const [priorityData, setPriorityData] = useState([
+        { priority: "High", tasks: 0 },
+        { priority: "Medium", tasks: 0 },
+        { priority: "Low", tasks: 0 },
+    ]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPriorityData = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return alert("Please login first");
+
+            try {
+                console.log("Fetching priority data...");
+                const res = await fetch("http://localhost:5000/api/tasks/priority-counts", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                const data = await res.json();
+                console.log("API Response:", data);
+
+                if (res.ok) {
+                    setPriorityData([
+                        { priority: "High", tasks: data.data.High || 0 },
+                        { priority: "Medium", tasks: data.data.Medium || 0 },
+                        { priority: "Low", tasks: data.data.Low || 0 },
+                    ]);
+                } else {
+                    console.error("API Error:", data.error);
+                }
+            } catch (err) {
+                console.error("Fetch Error:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPriorityData();
+    }, []);
+
+    if (loading) return <div className="p-4">Loading dashboard...</div>;
+
     return(
         <div>
             <WebHeader/>
@@ -14,7 +56,7 @@ const AdminDashboard =()=>{
 
                         <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 lg:gap-x-10">
                             <div className="flex-1">
-                                <BarChartComponent />
+                                <BarChartComponent data={priorityData}/>
                             </div>
                             <div className="flex-1">
                                 <AdminAnalysisGraph />

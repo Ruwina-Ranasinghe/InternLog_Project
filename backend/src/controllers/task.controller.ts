@@ -4,6 +4,7 @@ import {
     getUserTasksService,
     getAllTasksService,
     updateTaskService, deleteTaskService, getTaskStatusCountsService, getTasksByUserService,
+    getTaskPriorityCountsService,
 } from "../services/task.service";
 
 import {IRequest} from "../constants/request";
@@ -119,6 +120,17 @@ export const getUserTasksByAdmin = async (req: IRequest, res: Response, next: Ne
         console.log("Tasks fetched:", data);
         console.log(InfoMessages.TASK_FETCHING_SUCCESSFUL_BY_ADMIN);
         res.send(data);
+    } catch (e) {
+        next(e);
+    }
+};
+
+export const getTaskPriorityCounts = async (req: IRequest, res: Response, next: NextFunction) => {
+    try {
+        console.log(InfoMessages.PRIORITY_COUNTS_FETCHING_STARTED);
+        const data = await getTaskPriorityCountsService();
+        console.log(InfoMessages.PRIORITY_COUNTS_FETCHING_SUCCESS);
+        res.send({ data });
     } catch (e) {
         next(e);
     }
