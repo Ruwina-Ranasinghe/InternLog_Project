@@ -1,40 +1,56 @@
 import React from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+
+interface TaskStatusData {
+    name: string;
+    value: number;
+    color: string;
+}
 
 interface AdminAnalysisGraphProps {
-    completed?: number;
-    inProgress?: number;
-    pending?: number;
+    data: TaskStatusData[];
     height?: number;
     innerRadius?: number;
     outerRadius?: number;
 }
 
-// Named export
 const AdminAnalysisGraph: React.FC<AdminAnalysisGraphProps> = ({
-                                                                          completed=100,
-                                                                          inProgress=200,
-                                                                          pending=200,
-                                                                          height = 200,
-                                                                          innerRadius = 50,
-                                                                          outerRadius = 80,
-                                                                      }) => {
-    const taskData = [
-        { name: 'Completed', value: completed, color: '#22C55E' },
-        { name: 'In Progress', value: inProgress, color: '#EF4444' },
-        { name: 'Pending', value: pending, color: '#A855F7' },
-    ];
+                                                                   data,
+                                                                   height = 250,
+                                                                   innerRadius = 70,
+                                                                   outerRadius = 100,
+                                                               }) => {
+    console.log("AdminAnalysisGraph received data:", data);
+
+    const totalTasks = data.reduce((sum, item) => sum + item.value, 0);
+
+    const CustomTooltip = ({ active, payload }: any) => {
+        if (active && payload && payload.length) {
+            const data = payload[0];
+            const percentage = totalTasks > 0 ? ((data.value / totalTasks) * 100).toFixed(1) : 0;
+            return (
+                <div className="bg-white p-2 border border-gray-300 rounded shadow">
+                    <p className="font-semibold" style={{ color: data.payload.color }}>
+                        {data.name}: {data.value}
+                    </p>
+                    <p className="text-sm text-gray-600">{percentage}%</p>
+                </div>
+            );
+        }
+        return null;
+    };
 
     return (
-        <div className="bg-gray-100 p-6 rounded-lg border-2 border-[#B453F5] w-full max-w-2xl md:w-96">
-            <h3 className="text-purple-600 font-semibold text-center mb-4">Overall Task Status</h3>
+        <div className="bg-white border-2 border-[#B453F5] rounded-lg shadow-md p-6 w-full md:w-96 h-96">
+            <h3 className="text-purple-600 font-semibold text-center mb-4">
+                Overall Task Status
+            </h3>
 
-            {/* Chart Container */}
             <div style={{ height: `${height}px` }} className="mb-4">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                         <Pie
-                            data={taskData}
+                            data={data}
                             cx="50%"
                             cy="50%"
                             innerRadius={innerRadius}
@@ -42,28 +58,22 @@ const AdminAnalysisGraph: React.FC<AdminAnalysisGraphProps> = ({
                             paddingAngle={0}
                             dataKey="value"
                         >
-                            {taskData.map((entry, index) => (
+                            {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
                             ))}
                         </Pie>
+                        <Tooltip content={<CustomTooltip />} />
                     </PieChart>
                 </ResponsiveContainer>
             </div>
 
-            {/* Legend */}
-            <div className="flex justify-center gap-6 flex-wrap">
-                {taskData.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                        <div
-                            className="w-3 h-3 rounded-full mr-2"
-                            style={{ backgroundColor: item.color }}
-                        />
-                        <span className="text-sm text-gray-700">{item.name}</span>
-                    </div>
-                ))}
+            <div className="text-center mb-4">
+                <span className="text-lg font-medium text-gray-700">
+                    Total Tasks: {totalTasks}
+                </span>
             </div>
         </div>
     );
 };
 
-export default AdminAnalysisGraph
+export default AdminAnalysisGraph;

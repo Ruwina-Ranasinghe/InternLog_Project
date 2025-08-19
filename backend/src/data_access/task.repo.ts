@@ -50,7 +50,7 @@ export const getTaskStatusCountsRepo = async (userId: string | mongoose.Types.Ob
         rawCounts.forEach((item: { _id: string; count: number }) => {
             if (item._id === "completed") counts.completed = item.count;
             if (item._id === "in-progress") counts.inProgress = item.count;
-            if (item._id === "todo") counts.todo = item.count; // Now using "todo" directly
+            if (item._id === "todo") counts.todo = item.count;
         });
 
         return counts;
@@ -65,11 +65,11 @@ export const getTaskPriorityCountsRepo = async () => {
 
         const results = await Task.aggregate([
             {
-                $match: { priority: { $exists: true, $ne: null } } // Exclude null/undefined
+                $match: { priority: { $exists: true, $ne: null } }
             },
             {
                 $group: {
-                    _id: "$priority",  // Keep original case
+                    _id: "$priority",
                     count: { $sum: 1 }
                 }
             }
@@ -97,6 +97,48 @@ export const getTaskPriorityCountsRepo = async () => {
             errorMessage += `: ${error.message}`;
         }
         console.error("Error in getTaskPriorityCountsRepo:", error);
+        throw new Error(errorMessage);
+    }
+};
+
+export const getAllUsersTaskStatusCountsRepo = async () => {
+    try {
+        console.log("Fetching all users task status counts from DB...");
+
+        const results = await Task.aggregate([
+            {
+                $match: { status: { $exists: true, $ne: null } } // Exclude null/undefined
+            },
+            {
+                $group: {
+                    _id: "$status",  // Keep original case
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        console.log("Raw all users status counts from DB:", results);
+
+        const counts = {
+            completed: 0,
+            inProgress: 0,
+            todo: 0
+        };
+
+        results.forEach(item => {
+            if (item._id === 'completed') counts.completed = item.count;
+            if (item._id === 'in-progress') counts.inProgress = item.count;
+            if (item._id === 'todo') counts.todo = item.count;
+        });
+
+        console.log('All users task status counts:', counts);
+        return counts;
+    } catch (error: unknown) {
+        let errorMessage = "Failed to fetch all users task status counts";
+        if (error instanceof Error) {
+            errorMessage += `: ${error.message}`;
+        }
+        console.error("Error in getAllUsersTaskStatusCountsRepo:", error);
         throw new Error(errorMessage);
     }
 };

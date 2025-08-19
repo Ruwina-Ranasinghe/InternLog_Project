@@ -6,7 +6,7 @@ import {authMiddleware} from "../middleware/auth.middleware";
 import {
     createTask,
     deleteTask,
-    getAllTasks,
+    getAllTasks, getAllUsersTaskStatusCounts,
     getTaskPriorityCounts,
     getTaskStatusCounts,
     getUserTasks,
@@ -32,6 +32,7 @@ const upload = multer({ storage });
 taskRouter.get('/', authMiddleware(Users.ADMIN),getAllTasks);
 taskRouter.get('/user/:id', authMiddleware(Users.ADMIN),getUserTasksByAdmin);
 taskRouter.get('/priority-counts', authMiddleware(Users.ADMIN), getTaskPriorityCounts);
+taskRouter.get('/all-users-status-counts', authMiddleware(Users.ADMIN), getAllUsersTaskStatusCounts);
 
 taskRouter.get('/get-tasks',authMiddleware(Users.USER),getUserTasks);
 taskRouter.post('/create-task', authMiddleware(Users.USER), upload.array("attachments"), createTask);

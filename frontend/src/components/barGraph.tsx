@@ -20,7 +20,7 @@ interface Props {
 const BarChartComponent = ({ data }: Props)  => {
     console.log("Chart received data:", data);
     return (
-        <div className="bg-white border-2 border-[#B453F5] rounded-lg shadow-md p-6 w-full md:w-96">
+        <div className="bg-white border-2 border-[#B453F5] rounded-lg shadow-md p-6 w-full md:w-96 h-96">
             <h3 className="text-purple-600 font-semibold text-center mb-4">
                 Overall Task Priority
             </h3>

@@ -30,6 +30,8 @@ export class InfoMessages {
     public static TASK_STATUS_FETCHED = "Task status count fetching successful";
     public static PRIORITY_COUNTS_FETCHING_STARTED: 'Fetching task priority counts started';
     public static PRIORITY_COUNTS_FETCHING_SUCCESS: 'Task priority counts fetched successfully';
+    public static ALL_USERS_STATUS_COUNTS_FETCHING_STARTED = 'Fetching all users task status counts started';
+    public static ALL_USERS_STATUS_COUNTS_FETCHING_SUCCESS = 'All users task status counts fetched successfully';
 }
 
 export class HttpCodes {

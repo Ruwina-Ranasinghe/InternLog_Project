@@ -2,7 +2,9 @@ import {ITask, Task} from "../models/task.model";
 import {
     createTaskRepo,
     deleteTaskRepo,
-    getAllTasksRepo, getTaskPriorityCountsRepo,
+    getAllTasksRepo,
+    getAllUsersTaskStatusCountsRepo,
+    getTaskPriorityCountsRepo,
     getTasksRepo,
     getTaskStatusCountsRepo,
     updateTaskRepo
@@ -48,4 +50,8 @@ export const getTasksByUserService = (userId: string) => {
 
 export const getTaskPriorityCountsService = async () => {
     return getTaskPriorityCountsRepo();
+};
+
+export const getAllUsersTaskStatusCountsService = async () => {
+    return getAllUsersTaskStatusCountsRepo();
 };

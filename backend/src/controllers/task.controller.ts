@@ -4,7 +4,7 @@ import {
     getUserTasksService,
     getAllTasksService,
     updateTaskService, deleteTaskService, getTaskStatusCountsService, getTasksByUserService,
-    getTaskPriorityCountsService,
+    getTaskPriorityCountsService, getAllUsersTaskStatusCountsService,
 } from "../services/task.service";
 
 import {IRequest} from "../constants/request";
@@ -130,6 +130,17 @@ export const getTaskPriorityCounts = async (req: IRequest, res: Response, next: 
         console.log(InfoMessages.PRIORITY_COUNTS_FETCHING_STARTED);
         const data = await getTaskPriorityCountsService();
         console.log(InfoMessages.PRIORITY_COUNTS_FETCHING_SUCCESS);
+        res.send({ data });
+    } catch (e) {
+        next(e);
+    }
+};
+
+export const getAllUsersTaskStatusCounts = async (req: IRequest, res: Response, next: NextFunction) => {
+    try {
+        console.log(InfoMessages.ALL_USERS_STATUS_COUNTS_FETCHING_STARTED);
+        const data = await getAllUsersTaskStatusCountsService();
+        console.log(InfoMessages.ALL_USERS_STATUS_COUNTS_FETCHING_SUCCESS);
         res.send({ data });
     } catch (e) {
         next(e);
