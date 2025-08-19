@@ -7,19 +7,39 @@ const EditTaskForm = () => {
   const { task } = location.state || {};
 
   const [formData, setFormData] = useState({
-    title: task?.task_name || '',
-    description: task?.description || '',
-    priority: task?.priority || 'Low',
-    dueDate: task?.dueDate || '',
+    title: '',
+    description: '',
+    status: 'pending',
+    priority: 'Low',
+    dueDate: '',
     attachments: [] as File[]
   });
 
-  // Redirect if no task is passed
+  // ✅ Prefill form data properly (fixing dueDate issue)
   useEffect(() => {
     if (!task) {
       alert("No task data provided!");
       navigate('/view-all-tasks');
+      return;
     }
+
+    let formattedDueDate = '';
+    if (task.dueDate) {
+      const rawDate =
+          typeof task.dueDate === "string"
+              ? task.dueDate
+              : task.dueDate.$date;
+      formattedDueDate = new Date(rawDate).toISOString().split("T")[0]; // YYYY-MM-DD
+    }
+
+    setFormData({
+      title: task.task_name || '',
+      description: task.description || '',
+      status: task.status || 'pending',
+      priority: task.priority || 'Low',
+      dueDate: formattedDueDate,
+      attachments: [] // you can preload existing files here if your backend supports it
+    });
   }, [task, navigate]);
 
   const handleClose = () => {
@@ -53,7 +73,6 @@ const EditTaskForm = () => {
     }));
   };
 
-  // ✅ Save changes to backend
   const handleSaveChanges = async () => {
     if (!task?._id) {
       alert("Task ID missing!");
@@ -61,11 +80,12 @@ const EditTaskForm = () => {
     }
 
     try {
-      const token = localStorage.getItem("token"); // If using auth
+      const token = localStorage.getItem("token");
       const formPayload = new FormData();
 
       formPayload.append("task_name", formData.title);
       formPayload.append("description", formData.description);
+      formPayload.append("status", formData.status);
       formPayload.append("priority", formData.priority);
       formPayload.append("dueDate", formData.dueDate);
 
@@ -98,7 +118,6 @@ const EditTaskForm = () => {
     }
   };
 
-  // 🚀 DELETE TASK FUNCTION
   const handleDeleteTask = async () => {
     if (!task?._id) {
       alert("Task ID missing!");
@@ -134,45 +153,24 @@ const EditTaskForm = () => {
       <div className="flex items-center justify-center pl-4 pr-4">
         <div className="w-full max-w-md lg:max-w-4xl bg-purple-200 rounded-3xl p-6 shadow-lg border-2 border-purple-300 relative">
 
-          {/* ❌ Close Button */}
+          {/* Close & Delete Buttons */}
           <button
               onClick={handleClose}
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 hover:bg-gray-400 transition-colors group"
               aria-label="Close"
           >
-            <svg
-                className="w-5 h-5 text-gray-600 group-hover:text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
-              <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-              />
+            <svg className="w-5 h-5 text-gray-600 group-hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
 
-          {/* 🗑 Delete Button */}
           <button
               onClick={handleDeleteTask}
               className="absolute top-4 right-14 w-8 h-8 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 transition-colors"
               aria-label="Delete Task"
           >
-            <svg
-                className="w-5 h-5 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
-              <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-6 4h8m-1 0v10m-6-10v10"
-              />
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-6 4h8m-1 0v10m-6-10v10"/>
             </svg>
           </button>
 
@@ -181,9 +179,7 @@ const EditTaskForm = () => {
           <div className="space-y-4">
             {/* Task Title */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Task Title
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Task Title</label>
               <input
                   type="text"
                   name="title"
@@ -196,9 +192,7 @@ const EditTaskForm = () => {
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
               <textarea
                   name="description"
                   value={formData.description}
@@ -209,12 +203,25 @@ const EditTaskForm = () => {
               />
             </div>
 
-            {/* Priority and Due Date */}
+            {/* Status Dropdown */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+              <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
+            {/* Priority + Due Date */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Priority
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
                 <select
                     name="priority"
                     value={formData.priority}
@@ -228,9 +235,7 @@ const EditTaskForm = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Due Date
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Due Date</label>
                 <input
                     type="date"
                     name="dueDate"
@@ -241,11 +246,9 @@ const EditTaskForm = () => {
               </div>
             </div>
 
-            {/* Attachments */}
+            {/* Attachments Section */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Add Attachments
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Add Attachments</label>
               <div className="flex gap-2">
                 <div className="flex-1 relative">
                   <input

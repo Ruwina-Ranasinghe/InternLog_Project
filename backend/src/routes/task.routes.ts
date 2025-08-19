@@ -9,7 +9,6 @@ import {
     getAllTasks,
     getTaskStatusCounts,
     getUserTasks,
-    getUserTasks,
     getUserTasksByAdmin,
     updateTask
 } from "../controllers/task.controller";
