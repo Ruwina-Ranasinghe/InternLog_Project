@@ -112,7 +112,11 @@ export const getTaskStatusCounts = async (req: IRequest, res: Response, next: Ne
 export const getUserTasksByAdmin = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
         console.log(InfoMessages.TASK_FETCHING_STARTED_BY_ADMIN);
-        const data = await getTasksByUserService(req.params.userId);
+        console.log("User ID received:", req.params.id);
+
+        const data = await getTasksByUserService(req.params.id);
+
+        console.log("Tasks fetched:", data);
         console.log(InfoMessages.TASK_FETCHING_SUCCESSFUL_BY_ADMIN);
         res.send(data);
     } catch (e) {

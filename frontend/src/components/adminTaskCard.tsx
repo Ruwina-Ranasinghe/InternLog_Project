@@ -1,57 +1,87 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 interface Task {
-  id: number;
-  title: string;
+  _id: string;
+  task_name: string;
   description: string;
-  status: "In Progress" | "To do" | "Completed";
+  status: "To do" | "In Progress" | "Completed";
 }
 
-const tasks: Task[] = [
-  {
-    id: 1,
-    title: "User 1 - Task 1",
-    description:
-      "Description Description Description Description Description Description Description Description Description",
-    status: "In Progress",
-  },
-  {
-    id: 2,
-    title: "Task 2",
-    description:
-      "Description Description Description Description Description Description Description Description Description",
-    status: "Completed",
-  },
-];
+const UserTasks: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
 
-const UserTasks = () => {
+  const getStatusClass = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "to do":
+      case "todo":
+        return "bg-yellow-500 text-white";
+      case "in progress":
+      case "in-progress":
+        return "bg-red-600 text-white";
+      case "completed":
+        return "bg-green-500 text-white";
+      default:
+        return "bg-gray-400 text-white";
+    }
+  };
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+            `http://localhost:5000/api/tasks/user/${id}`,
+            {
+              headers: token ? { Authorization: `Bearer ${token}` } : {},
+            }
+        );
+        setTasks(response.data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, [id]);
+
+  if (loading) {
+    return <p className="text-center text-gray-500 mt-6">Loading tasks...</p>;
+  }
+
+  if (tasks.length === 0) {
+    return <p className="text-center text-gray-500 mt-6">This user currently has no tasks.</p>;
+  }
+
   return (
-    <div className="lg:space-y-6  space-y-6 ">
-      {tasks.map((task) => (
-        <div
-          key={task.id}
-          className="flex items-center justify-between border rounded-lg bg-gray-100 p-4 shadow-sm"
-          style={{  border: '1px solid #830999'  }}
-        >
-          <div>
-            <h2 className="font-semibold text-lg text-gray-800">{task.title}</h2>
-            <p className="text-sm text-gray-800 mr-2">{task.description}</p>
-          </div>
+      <div className="space-y-4 max-w-4xl mx-auto p-4">
+        {tasks.map((task) => (
+            <div
+                key={task._id}
+                className="bg-white p-4 rounded-xl border border-purple-300 flex justify-between items-center shadow-md hover:shadow-lg transition"
+            >
+              {/* Task Info */}
+              <div>
+                <h2 className="font-semibold text-lg text-gray-800">{task.task_name}</h2>
+                <p className="text-gray-600 text-sm mt-1">{task.description}</p>
+              </div>
 
-          <span
-            className={`lg:px-3 lg:py-1 lg:w-24 px-3 py-1 w-15 lg:p-5 rounded-lg text-white text-sm font-semibold ${
-              task.status === "To do"
-                ? "bg-[#B695DF]"
-                : task.status === "In Progress"
-                ? "bg-[#BA0C06]"
-                : task.status === "Completed"
-                ? "bg-[#2ABA06]"
-                : ""
-            }`}
-          >
+              {/* Status */}
+              <span
+                  className={`px-3 py-1 rounded-full font-semibold text-sm ${getStatusClass(
+                      task.status
+                  )}`}
+              >
             {task.status}
           </span>
-        </div>
-      ))}
-    </div>
+            </div>
+        ))}
+      </div>
   );
 };
 

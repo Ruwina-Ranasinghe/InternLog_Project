@@ -1,4 +1,4 @@
-import { ITask} from "../models/task.model";
+import {ITask, Task} from "../models/task.model";
 import {
     createTaskRepo,
     deleteTaskRepo,
@@ -43,5 +43,5 @@ export const getTaskStatusCountsService = async (userId: string) => {
     }
 };
 export const getTasksByUserService = (userId: string) => {
-    return getTasksRepo({ user: userId });
+    return Task.find({ user: userId }).populate("user", "name email").exec();
 };
