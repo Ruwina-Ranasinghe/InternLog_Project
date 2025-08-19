@@ -5,6 +5,7 @@ import BarChartComponent from "../../../components/barGraph.tsx";
 import AdminAnalysisGraph from "../../../components/adminAnalysisGraph.tsx";
 
 const AdminDashboard = () => {
+    const [completionRate, setCompletionRate] = useState(0);
     const [priorityData, setPriorityData] = useState([
         { priority: "High", tasks: 0 },
         { priority: "Medium", tasks: 0 },
@@ -23,12 +24,10 @@ const AdminDashboard = () => {
             if (!token) return alert("Please login first");
 
             try {
-                console.log("Fetching priority data...");
                 const res = await fetch("http://localhost:5000/api/tasks/priority-counts", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const data = await res.json();
-                console.log("API Response:", data);
 
                 if (res.ok) {
                     setPriorityData([
@@ -37,10 +36,10 @@ const AdminDashboard = () => {
                         { priority: "Low", tasks: data.data.Low || 0 },
                     ]);
                 } else {
-                    console.error("API Error:", data.error);
+                    console.error("Priority API Error:", data.error);
                 }
             } catch (err) {
-                console.error("Fetch Error:", err);
+                console.error("Priority Fetch Error:", err);
             } finally {
                 setLoading(false);
             }
@@ -51,33 +50,28 @@ const AdminDashboard = () => {
             if (!token) return alert("Please login first");
 
             try {
-                console.log("Fetching all users status data...");
                 const statusRes = await fetch("http://localhost:5000/api/tasks/all-users-status-counts", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
-                console.log("Status Response Status:", statusRes.status);
-                console.log("Status Response OK:", statusRes.ok);
-
                 const statusData = await statusRes.json();
-                console.log("Status API Response:", statusData);
-                console.log("Status Data Keys:", Object.keys(statusData.data || {}));
 
                 if (statusRes.ok) {
-                    console.log("Setting status data with values:", {
-                        completed: statusData.data.completed || 0,
-                        inProgress: statusData.data.inProgress || 0,
-                        todo: statusData.data.todo || 0
-                    });
+                    const completed = statusData.data.completed || 0;
+                    const inProgress = statusData.data.inProgress || 0;
+                    const todo = statusData.data.todo || 0;
+
+                    const total = completed + inProgress + todo;
+                    const rate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
                     setStatusData([
-                        { name: "Completed", value: statusData.data.completed || 0, color: "#22C55E" },
-                        { name: "In Progress", value: statusData.data.inProgress || 0, color: "#EF4444" },
-                        { name: "Todo", value: statusData.data.todo || 0, color: "#A855F7" },
+                        { name: "Completed", value: completed, color: "#22C55E" },
+                        { name: "In Progress", value: inProgress, color: "#EF4444" },
+                        { name: "Todo", value: todo, color: "#A855F7" },
                     ]);
+                    setCompletionRate(rate);
                 } else {
                     console.error("Status API Error:", statusData.error);
-                    console.error("Status Response:", statusData);
                 }
             } catch (err) {
                 console.error("Status Fetch Error:", err);
@@ -97,7 +91,7 @@ const AdminDashboard = () => {
                 <SidebarAdmin />
                 <main className="flex-1 ml-0 md:ml-64 mt-14 sm:mt-16 md:mt-20 lg:mt-24 p-4 overflow-y-auto flex justify-center">
                     <div className="lg:p-10 lg:pt-50 p-3 pt-10">
-                        <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 lg:gap-x-10">
+                        <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 lg:gap-x-24">
                             <div className="flex-1">
                                 <BarChartComponent data={priorityData}/>
                             </div>
@@ -105,9 +99,9 @@ const AdminDashboard = () => {
                                 <AdminAnalysisGraph data={statusData} />
                             </div>
                         </div>
-                        <div className="flex justify-center pt-6">
+                        <div className="flex justify-center pt-12">
                             <div className="bg-white rounded-lg shadow-lg px-6 py-4 text-2xl font-semibold text-[#B453F5]">
-                                Total Task Completion Rate : {10 * 7}%
+                                Total Task Completion Rate : {completionRate}%
                             </div>
                         </div>
                     </div>
