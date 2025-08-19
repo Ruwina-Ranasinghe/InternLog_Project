@@ -12,7 +12,9 @@ import {ErrorMessages, HttpCodes, InfoMessages} from "../constants/messages";
 export const createTask = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
         console.log(InfoMessages.TASK_CREATION_STARTED);
-        const data = await createTaskService({ ...req.body, user: req.user?.id });
+        const attachments = (req.files as Express.Multer.File[] | undefined) || [];
+        const attachmentData = attachments.map(file => file.path); // only save path
+        const data = await createTaskService({ ...req.body, user: req.user?.id, attachments: attachmentData });
         console.log(InfoMessages.TASK_CREATION_SUCCESSFUL);
         res.send(data);
     } catch (e) {
