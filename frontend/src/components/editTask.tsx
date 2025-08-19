@@ -212,7 +212,7 @@ const EditTaskForm = () => {
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
-                <option value="pending">Pending</option>
+                <option value="todo">Todo</option>
                 <option value="in-progress">In Progress</option>
                 <option value="completed">Completed</option>
               </select>

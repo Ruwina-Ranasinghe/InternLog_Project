@@ -83,7 +83,7 @@ const CreateTaskForm = () => {
     };
 
     return (
-        <div className="flex items-center justify-center pl-4 pr-4">
+        <div className="flex items-center justify-center pl-4 pr-4 ">
             <div className="w-full max-w-md lg:max-w-4xl bg-purple-200 rounded-3xl p-6 shadow-lg border-2 border-purple-300 relative">
                 {/* Close Button */}
                 <button
@@ -133,7 +133,7 @@ const CreateTaskForm = () => {
                             onChange={handleInputChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                         >
-                            <option value="pending">Pending</option>
+                            <option value="todo">Todo</option>
                             <option value="in-progress">In Progress</option>
                             <option value="completed">Completed</option>
                         </select>
