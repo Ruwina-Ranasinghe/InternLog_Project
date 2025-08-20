@@ -1,17 +1,9 @@
-<p align="center"  style = "margin-top:40px;">
-  <img src="frontend/src/assets/logo1.png" alt="InternLog Logo" width="45" style="vertical-align: middle;"/>
-  <span style="font-size:24px; font-weight:bold; text-decoration:underline; vertical-align: middle; margin-left:10px; padding-bottom:20px;">
-    InternLog - Task Manager Web Application
-  </span>
-</p>
-
-<p style = "margin-top:35px;">
+## **InternLog - Task Manager Web Application**
 
 **InternLog** is a modern Task Management Web Application built using the MERN stack (MongoDB, Express.js, React, Node.js) with Mantine UI for a sleek and responsive interface.
 It helps interns, teams, and organizations create, track, and manage tasks efficiently with full CRUD operations and an intuitive workflow.
-</p>
 
-**<u>Features</u>**
+**Features**
 
 * User Dashboard
   * View personal progress with interactive graphs
@@ -46,7 +38,7 @@ It helps interns, teams, and organizations create, track, and manage tasks effic
 
     * RESTful API for scalability
 
-**<u>Tech Stack</u>**
+**Tech Stack**
 
 * Frontend:
 
@@ -76,7 +68,7 @@ It helps interns, teams, and organizations create, track, and manage tasks effic
 
     * REST API
 
-**<u>Installation & Setup</u>**
+**Installation & Setup**
 1. Clone the repository
 
        git clone https://github.com/Ruwina-Ranasinghe/InternLog_Project.git
@@ -109,13 +101,13 @@ It helps interns, teams, and organizations create, track, and manage tasks effic
        npm run dev
 
 
-**<u>Access the app:</u>**
+**Access the app:**
 
 * Frontend → http://localhost:5173
 
 * Backend → http://localhost:5000
 
-**<u>API Endpoints</u>**
+**API Endpoints**
 
 * Authentication
 
@@ -134,4 +126,4 @@ It helps interns, teams, and organizations create, track, and manage tasks effic
     * DELETE /api/tasks/delete-task/:id → Delete a task
 
     
-***InternLog – Streamline your internship journey with smart task management.***
+***- - - - Streamline your internship journey with smart task management. - - - -***
