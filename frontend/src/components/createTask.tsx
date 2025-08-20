@@ -13,9 +13,7 @@ const CreateTaskForm = () => {
         attachments: [] as File[]
     });
 
-    const handleClose = () => {
-        navigate('/user-dashboard');
-    };
+
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
