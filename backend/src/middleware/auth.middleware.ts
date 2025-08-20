@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 import {IRequest} from "../constants/request";
+import {verifyToken} from "../util/jwt";
 
 interface JwtPayload {
     id: string;
@@ -17,7 +17,7 @@ export const authMiddleware = (requiredRole?: 'admin' | 'user') => {
         const token = authHeader.split(' ')[1];
 
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+            const decoded = verifyToken(token) as JwtPayload;
             req.user = decoded;
 
             // Role check

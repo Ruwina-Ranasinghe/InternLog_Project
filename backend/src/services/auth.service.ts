@@ -19,7 +19,6 @@ export const registerUserService = async (data :any) => {
     name: user.name,
     email: user.email,
     isAdmin: user.isAdmin,
-    token: generateToken({ id: user._id, isAdmin: user.isAdmin })
   };
 };
 
