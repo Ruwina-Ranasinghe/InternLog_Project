@@ -84,16 +84,7 @@ const CreateTaskForm = () => {
 
     return (
         <div className="flex items-center justify-center pl-4 pr-4 ">
-            <div className="w-full max-w-md lg:max-w-4xl bg-purple-200 rounded-3xl p-6 shadow-lg border-2 border-purple-300 relative">
-                {/* Close Button */}
-                <button
-                    onClick={handleClose}
-                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 hover:bg-gray-400 transition-colors group"
-                >
-                    <svg className="w-5 h-5 text-gray-600 group-hover:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+            <div className="w-full max-w-md lg:max-w-4xl bg-purple-200 rounded-3xl p-6 shadow-lg border-2 border-purple-300 ">
 
                 <h1 className="text-2xl font-bold text-gray-800 mb-6 pr-10">Create a Task</h1>
 
