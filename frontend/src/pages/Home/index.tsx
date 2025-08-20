@@ -40,7 +40,7 @@ export default function Home() {
             </header>
 
     {/* Main Section */}
-            <main className="flex-1 bg-[#D3B5F8] flex flex-col md:flex-row items-center justify-center px-6 py-10 md:py-20 gap-8">
+            <div className="flex-1 bg-[#D3B5F8] flex flex-col md:flex-row items-center justify-center px-6 py-10 md:py-20 gap-8">
                 {/* Left content */}
                 <div className="flex-1 flex flex-col justify-center md:items-start items-center text-center md:text-left space-y-8 md:space-y-12">
                     <h1 className="text-3xl md:text-5xl font-extrabold text-black leading-snug">
@@ -78,7 +78,7 @@ export default function Home() {
                         className="w-[500px] md:w-[700px] lg:w-[750px] drop-shadow-lg"
                     />
                 </div>
-            </main>
+            </div>
 
         </div>
     );

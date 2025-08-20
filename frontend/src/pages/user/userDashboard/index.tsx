@@ -47,7 +47,7 @@ const UserDashboard = () => {
             <WebHeader/>
             <div className="flex">
                 <SidebarUser/>
-                <main className="flex-1 ml-0 md:ml-64 mt-14 sm:mt-16 md:mt-20 lg:mt-24 p-4 overflow-y-auto">
+                <div className="flex-1 ml-0 md:ml-64 mt-14 sm:mt-16 md:mt-20 lg:mt-24 p-4 overflow-y-auto">
                     <div className="lg:pt-3 p-10 pt-9">
                         <div>
                             <TaskStatusChart completed={counts.completed} inProgress={counts.inProgress} todo={counts.todo} height={240} innerRadius={80} outerRadius={110}/>
@@ -57,7 +57,7 @@ const UserDashboard = () => {
                         </div>
                     </div>
 
-                </main>
+                </div>
             </div>
 
         </div>
