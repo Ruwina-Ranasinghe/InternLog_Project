@@ -6,6 +6,7 @@ interface Task {
   task_name: string;
   description: string;
   status: "todo" | "in-progress" | "completed";
+  attachments?: string[];
 }
 
 const TaskCard = () => {
@@ -77,6 +78,38 @@ const TaskCard = () => {
               <div>
                 <h2 className="font-semibold text-lg">{task.task_name}</h2>
                 <p className="text-gray-600 text-sm mt-1">{task.description}</p>
+
+                {task.attachments && task.attachments.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {task.attachments.map((file, index) => (
+                          <a
+                              key={index}
+                              href={`http://localhost:5000${file}`} // backend must serve static files
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              download
+                              className="flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-800 rounded-md hover:bg-purple-200 transition-colors font-medium shadow-sm"
+                          >
+                            {/* Download icon */}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                              <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12v8m0 0l-4-4m4 4l4-4M12 4v8"
+                              />
+                            </svg>
+                            Attachment {index + 1}
+                          </a>
+                      ))}
+                    </div>
+                )}
               </div>
 
               <div className="flex items-center gap-2">

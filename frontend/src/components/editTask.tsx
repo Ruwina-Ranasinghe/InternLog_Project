@@ -160,11 +160,27 @@ const EditTaskForm = () => {
           {/* Delete Button */}
           <button
               onClick={handleDeleteTask}
-              className="top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+              className="top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 transition-colors shadow-md"
               aria-label="Delete Task"
+              title="Delete Task"
           >
-            ✕
+            {/* Trash Icon */}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+            >
+              <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"
+              />
+            </svg>
           </button>
+
 
           <h1 className="text-2xl font-bold text-gray-800 mb-6 pr-10">Edit Task</h1>
 
@@ -243,21 +259,48 @@ const EditTaskForm = () => {
 
               {/* Existing Attachments */}
               {existingAttachments.length > 0 && (
-                  <div className="mb-2 space-y-1">
+                  <div className="mb-2 flex flex-wrap gap-2">
                     {existingAttachments.map((fileUrl, index) => (
-                        <div key={index} className="flex items-center justify-between bg-white p-2 rounded border">
-                          <a href={fileUrl} target="_blank" className="text-sm text-gray-600 truncate">{fileUrl.split('/').pop()}</a>
+                        <a
+                            key={index}
+                            href={`http://localhost:5000${fileUrl}`} // Serve static files
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-800 rounded-md hover:bg-purple-200 transition-colors font-medium shadow-sm"
+                        >
+                          {/* Download icon */}
+                          <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                          >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12v8m0 0l-4-4m4 4l4-4M12 4v8"
+                            />
+                          </svg>
+                          {fileUrl.split('/').pop()}
+                          {/* Display file name */}
                           <button
                               type="button"
-                              onClick={() => removeExistingFile(index)}
-                              className="text-red-500 hover:text-red-700 ml-2"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                removeExistingFile(index);
+                              }}
+                              className="ml-2 text-red-500 hover:text-red-700"
                           >
                             ✕
                           </button>
-                        </div>
+                        </a>
                     ))}
                   </div>
               )}
+
 
               {/* New Attachments */}
               <div className="flex gap-2">
@@ -268,11 +311,24 @@ const EditTaskForm = () => {
                       onChange={handleFileAdd}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
-                  <div className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-400 flex items-center">
+                  <div
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-400 flex items-center">
                     Add any file
                   </div>
                 </div>
+
+                <button
+                    type="button"
+                    onClick={() => {
+                      const fileInput = document.querySelector<HTMLInputElement>('input[type="file"]');
+                      fileInput?.click();
+                    }}
+                    className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors font-medium"
+                >
+                  Add
+                </button>
               </div>
+
 
               {formData.attachments.length > 0 && (
                   <div className="mt-2 space-y-1">

@@ -3,8 +3,12 @@ import {
     createTaskService,
     getUserTasksService,
     getAllTasksService,
-    updateTaskService, deleteTaskService, getTaskStatusCountsService, getTasksByUserService,
-    getTaskPriorityCountsService, getAllUsersTaskStatusCountsService,
+    updateTaskService,
+    deleteTaskService,
+    getTaskStatusCountsService,
+    getTasksByUserService,
+    getTaskPriorityCountsService,
+    getAllUsersTaskStatusCountsService,
 } from "../services/task.service";
 
 import {IRequest} from "../constants/request";
@@ -14,7 +18,7 @@ export const createTask = async (req: IRequest, res: Response, next: NextFunctio
     try {
         console.log(InfoMessages.TASK_CREATION_STARTED);
         const attachments = (req.files as Express.Multer.File[] | undefined) || [];
-        const attachmentData = attachments.map(file => file.path); // only save path
+        const attachmentData = attachments.map(file => `/uploads/${file.filename}`);
         const data = await createTaskService({ ...req.body, user: req.user?.id, attachments: attachmentData });
         console.log(InfoMessages.TASK_CREATION_SUCCESSFUL);
         res.send(data);
@@ -48,14 +52,34 @@ export const getAllTasks = async (req: IRequest, res: Response, next: NextFuncti
 export const updateTask = async (req: IRequest, res: Response, next: NextFunction) => {
     try {
         console.log(InfoMessages.TASK_UPDATING_STARTED);
-        const data = await updateTaskService(
-            req.user.id,
-            req.params.id,
-            req.body
-        );
+        const newFiles = (req.files as Express.Multer.File[] | undefined) || [];
+        const newAttachments = newFiles.map(file => `/uploads/${file.filename}`);
+
+        let existingAttachments: string[] = [];
+        if (req.body.existingAttachments) {
+            if (Array.isArray(req.body.existingAttachments)) {
+                existingAttachments = req.body.existingAttachments;
+            } else {
+                existingAttachments = [req.body.existingAttachments];
+            }
+        }
+
+        const finalAttachments = [...existingAttachments, ...newAttachments];
+
+        const updateData = {
+            task_name: req.body.task_name,
+            description: req.body.description,
+            status: req.body.status,
+            priority: req.body.priority,
+            dueDate: req.body.dueDate,
+            attachments: finalAttachments
+        };
+
+        const data = await updateTaskService(req.user.id, req.params.id, updateData);
+
         if (!data) {
             return res.status(HttpCodes.NOT_FOUND).json({
-                message: ErrorMessages.TASK_NOT_FOUND
+                message: ErrorMessages.TASK_NOT_FOUND,
             });
         }
         console.log(InfoMessages.TASK_UPDATED);
