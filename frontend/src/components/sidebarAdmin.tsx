@@ -24,7 +24,12 @@ const SidebarAdmin = () => {
   };
 
   const handleLogout = () => {
-      navigate("/");
+      localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+      localStorage.removeItem("isAdmin");
+
+      navigate("/", { replace: true });
   };
 
   return (
