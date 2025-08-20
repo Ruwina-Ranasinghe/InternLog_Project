@@ -1,69 +1,137 @@
-# React + TypeScript + Vite
+<p align="center"  style = "margin-top:40px;">
+  <img src="frontend/src/assets/logo1.png" alt="InternLog Logo" width="45" style="vertical-align: middle;"/>
+  <span style="font-size:24px; font-weight:bold; text-decoration:underline; vertical-align: middle; margin-left:10px; padding-bottom:20px;">
+    InternLog - Task Manager Web Application
+  </span>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p style = "margin-top:35px;">
 
-Currently, two official plugins are available:
+**InternLog** is a modern Task Management Web Application built using the MERN stack (MongoDB, Express.js, React, Node.js) with Mantine UI for a sleek and responsive interface.
+It helps interns, teams, and organizations create, track, and manage tasks efficiently with full CRUD operations and an intuitive workflow.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**<u>Features</u>**
 
-## Expanding the ESLint configuration
+* User Dashboard
+  * View personal progress with interactive graphs
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  * Perform CRUD operations on tasks
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    * Create new tasks with title, description, due date, attachments, priority, and status
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+    * Update task details at any time
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+    * Delete completed/unwanted tasks
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    * View all tasks in a clean and responsive layout
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* Admin Dashboard
+
+    * Monitor overall progress of all users with visual graphs
+
+    * View all tasks created in the system according to each user
+
+    * Manage system activity efficiently
+
+
+* General Features
+
+    * Secure Authentication & Authorization (JWT-based)
+
+    * Role-based access (User / Admin)
+
+    * Responsive UI built with Mantine
+
+    * RESTful API for scalability
+
+**<u>Tech Stack</u>**
+
+* Frontend:
+
+    * React.js
+
+    * Mantine UI 
+    * Axios
+
+
+* Backend:
+
+    * Node.js
+
+    * Express.js
+
+    * JWT, bcrypt
+
+
+* Database:
+
+    * MongoDB (Mongoose ODM)
+
+
+* Others:
+
+    * npm
+
+    * REST API
+
+**<u>Installation & Setup</u>**
+1. Clone the repository
+
+       git clone https://github.com/Ruwina-Ranasinghe/InternLog_Project.git
+       or 
+       git clone git@github.com:Ruwina-Ranasinghe/InternLog_Project.git
+
+       cd InternLog
+
+2. Setup Backend (server)
+
+       cd backend
+       npm install
+
+
+3. Create a .env file in /server and configure:
+
+        PORT=5000
+        MONGO_URI=your_mongodb_connection_string
+        JWT_SECRET=your_secret_key
+
+
+4. Run backend:
+
+        npm run dev
+
+5. Setup Frontend (client)
+
+       cd client
+       npm install
+       npm run dev
+
+
+**<u>Access the app:</u>**
+
+* Frontend → http://localhost:5173
+
+* Backend → http://localhost:5000
+
+**<u>API Endpoints</u>**
+
+* Authentication
+
+    * POST /api/auth/register → Register new user
+
+    * POST /api/auth/login → Login user
+
+* Tasks
+
+    * GET /api/tasks/get-tasks → Get all tasks
+
+    * POST /api/tasks/create-task → Create a task
+
+    * PUT /api/tasks/update-task/:id → Update a task
+
+    * DELETE /api/tasks/delete-task/:id → Delete a task
+
+    
+***InternLog – Streamline your internship journey with smart task management.***
