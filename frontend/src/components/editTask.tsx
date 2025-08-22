@@ -158,6 +158,7 @@ const EditTaskForm = () => {
         <div className="w-full max-w-md lg:max-w-4xl bg-purple-200 rounded-3xl p-6 shadow-lg border-2 border-purple-300">
 
           {/* Delete Button */}
+          <div className="justify-items-end">
           <button
               onClick={handleDeleteTask}
               className="top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 transition-colors shadow-md"
@@ -180,6 +181,7 @@ const EditTaskForm = () => {
               />
             </svg>
           </button>
+          </div>
 
 
           <h1 className="text-2xl font-bold text-gray-800 mb-6 pr-10">Edit Task</h1>
